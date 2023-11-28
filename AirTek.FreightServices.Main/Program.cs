@@ -1,15 +1,20 @@
-﻿using AirTek.FreightServices.Main.Implementation;
+﻿using AirFreightServices.OrdersScheduler.Interfaces;
+using AirTek.FreightServices.DataServices.Implementation;
+using AirTek.FreightServices.DataServices.Interfaces;
+using AirTek.FreightServices.Main.Implementation;
+using AirTek.FreightServices.OrderServices.Implementation;
 using System.Text;
 
 namespace AirTek.FreightServices.Main
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             PrintSampleInput();
             PrintInputRequest();
             LoadAirFreightCargoSchedule();
+            await LoadOrders();
         }
 
         private static void PrintSampleInput()
@@ -51,6 +56,14 @@ namespace AirTek.FreightServices.Main
             var flightsScheduleList = flightSchedulingService.CreateFlightsScheduleList();
             Console.WriteLine("Flights Schedule Result:");
             Console.WriteLine(flightSchedulingService.GetDisplayString());
+        }
+
+        private static async Task LoadOrders()
+        {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "coding-assigment-orders.json");
+            IOrdersLoader ordersLoader = new OrdersLoaderFromJsonFile(filePath);
+            IOrderDataService orderLoader = new OrderDataService(ordersLoader);
+            Console.WriteLine((await orderLoader.GetOrders()).ToString());
         }
     }
 }
