@@ -3,8 +3,8 @@ using AirTek.FreightServices.Shared.Models.Flight;
 
 namespace AirTek.FreightServices.FlightsServices.Interfaces.Services
 {
-    public interface IFlightSchedulingService<T> where T : IFlight
+    public interface IFreightTransportSchedulingService<T> : IBaseService where T : IFreightTransportWithCapacity
     {
-        FlightsScheduleList<T> CreateFlightsScheduleList();
+        FreightTransportScheduleList<T> CreateFlightsScheduleList();
     }
 }

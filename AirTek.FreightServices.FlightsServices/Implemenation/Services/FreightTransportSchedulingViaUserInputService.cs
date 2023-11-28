@@ -1,32 +1,34 @@
 ﻿using AirTek.FreightServices.FlightsServices.Interfaces.InputParsers;
 using AirTek.FreightServices.FlightsServices.Interfaces.Services;
+using AirTek.FreightServices.Shared.Interfaces;
 using AirTek.FreightServices.Shared.Interfaces.Factory;
+using AirTek.FreightServices.Shared.Interfaces.Factory.Models;
 using AirTek.FreightServices.Shared.Models.Flight;
 
-namespace AirTek.FreightServices.FlightsServices.Implemenation
+namespace AirTek.FreightServices.FlightsServices.Implemenation.Services
 {
-    public class AirFreightFlightSchedulingViaUserInputService : IFlightSchedulingService<AirFreightCargoFlight>, IFlightSchedulingServiceWithDisplay<AirFreightCargoFlight>
+    public class FreightTransportSchedulingViaUserInputService<T> : IFreightTransportSchedulingService<T>  where T : IFreightTransportWithCapacity
     {
         private readonly string _userInput;
-        private readonly IFlightScheduleFactory _flightScheduleFactory;
-        private readonly IFlightSchedulerParserFromUserInput<AirFreightCargoFlight> _flightDetailsParser;
-        private FlightsScheduleList<AirFreightCargoFlight> _flightsSchedulingList;
+        private readonly IFreightTransportScheduleFactory _flightScheduleFactory;
+        private readonly IFreightTransportSchedulerParserFromUserInput _flightDetailsParser;
+        private FreightTransportScheduleList<T> _flightsSchedulingList;
 
-        public AirFreightFlightSchedulingViaUserInputService(string userInput, IFlightScheduleFactory flightScheduleFactory, IFlightSchedulerParserFromUserInput<AirFreightCargoFlight> flightDetailsParser)
+        public FreightTransportSchedulingViaUserInputService(string userInput, IFreightTransportScheduleFactory flightScheduleFactory, IFreightTransportSchedulerParserFromUserInput flightDetailsParser)
         {
             _userInput = userInput;
             _flightScheduleFactory = flightScheduleFactory;
             _flightDetailsParser = flightDetailsParser;
         }
 
-        public FlightsScheduleList<AirFreightCargoFlight> CreateFlightsScheduleList()
+        public FreightTransportScheduleList<T> CreateFlightsScheduleList()
         {
             if (!string.IsNullOrEmpty(_userInput))
             {
                 _flightsSchedulingList = new();
                 // Split the schedule into lines
                 string[] lines = _userInput.Split('\n');
-                FlightsSchedule<AirFreightCargoFlight> flightSchedule = null;
+                FreightTransportSchedule<T> flightSchedule = null;
 
                 foreach (var line in lines)
                 {
@@ -34,20 +36,20 @@ namespace AirTek.FreightServices.FlightsServices.Implemenation
                     if (line.StartsWith("Day"))
                     {
                         int currentDay = _flightDetailsParser.ParseDayValue(line);
-                        flightSchedule = _flightScheduleFactory.CreateFlightsSchedule<AirFreightCargoFlight>();
+                        flightSchedule = _flightScheduleFactory.CreateFreightTransportSchedule<T>();
                         _flightsSchedulingList.AddPerDayFlightsSchedule(flightSchedule);
 
-                        if (flightSchedule is PerDayFlightsSchedule<AirFreightCargoFlight> perDay)
+                        if (flightSchedule is PerDayFreightTransportSchedule<T> perDay)
                         {
                             perDay.Day = currentDay;
                         }
                     }
                     else
                     {
-                        var flight = _flightDetailsParser.ParseFlightDetailsFromUserInput(line);
+                        var flight = _flightDetailsParser.ParseTransportDetailsFromUserInput<T>(line);
                         if (flight != null)
                         {
-                            flightSchedule.Flights.Add(flight);
+                            flightSchedule.FreightTransport.Add(flight);
                         }
                     }
                 }
@@ -60,5 +62,6 @@ namespace AirTek.FreightServices.FlightsServices.Implemenation
         {
             return _flightsSchedulingList.ToString();
         }
+
     }
 }

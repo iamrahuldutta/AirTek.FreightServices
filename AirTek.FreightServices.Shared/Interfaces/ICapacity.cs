@@ -1,6 +1,6 @@
 ﻿namespace AirTek.FreightServices.Shared.Interfaces
 {
-    public interface IAirFreightCargoFlight : IFlight
+    public interface ICapacity
     {
         int Capacity { get; init; }
     }

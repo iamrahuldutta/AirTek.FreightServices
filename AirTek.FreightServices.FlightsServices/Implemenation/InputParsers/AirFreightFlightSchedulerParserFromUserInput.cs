@@ -1,16 +1,17 @@
 ﻿using AirTek.FreightServices.FlightsServices.Interfaces.InputParsers;
 using AirTek.FreightServices.FlightsServices.Interfaces.Internal;
+using AirTek.FreightServices.Shared.Interfaces;
 using AirTek.FreightServices.Shared.Interfaces.Factory;
-using AirTek.FreightServices.Shared.Models.Flight;
+using AirTek.FreightServices.Shared.Interfaces.Factory.Models;
 using System.Text.RegularExpressions;
 
 namespace AirTek.FreightServices.FlightsServices.Implemenation.InputParsers
 {
-    public class AirFreightFlightSchedulerParserFromUserInput : IFlightSchedulerParserFromUserInput<AirFreightCargoFlight>
+    public class AirFreightFlightSchedulerParserFromUserInput : IFreightTransportSchedulerParserFromUserInput
     {
-        private readonly IAirFreightCargoFlightFactory _flightFactory;
+        private readonly IFreightTransportWithCapacityFactory _flightFactory;
         private readonly IFlightDataService _flightDataService;
-        public AirFreightFlightSchedulerParserFromUserInput(IAirFreightCargoFlightFactory flightFactory, IFlightDataService flightDataService)
+        public AirFreightFlightSchedulerParserFromUserInput(IFreightTransportWithCapacityFactory flightFactory, IFlightDataService flightDataService)
         {
             _flightFactory = flightFactory;
             _flightDataService = flightDataService;
@@ -21,9 +22,9 @@ namespace AirTek.FreightServices.FlightsServices.Implemenation.InputParsers
             return int.Parse(userInput.Substring(4, userInput.IndexOf(':') - 4).Trim());
         }
 
-        public AirFreightCargoFlight ParseFlightDetailsFromUserInput(string userInput)
+        public T ParseTransportDetailsFromUserInput<T>(string userInput) where T : IFreightTransportWithCapacity
         {
-            AirFreightCargoFlight flight = null;
+            T flight = default(T);
             if (string.IsNullOrEmpty(userInput))
             {
                 return flight;
@@ -47,7 +48,7 @@ namespace AirTek.FreightServices.FlightsServices.Implemenation.InputParsers
 
             var departure = _flightFactory.CreateCityInformation(departureCityValue, departureCodeValue);
             var arrival = _flightFactory.CreateCityInformation(destinationCityValue, destinationCodeValue);
-            flight = _flightFactory.CreateAirFreightCargoFlight(flightNumber, _flightDataService.GetDefaultFlightCapacity(), departure, arrival);
+            flight = _flightFactory.CreateFreightTransport<T>(flightNumber, _flightDataService.GetDefaultFlightCapacity(), departure, arrival);
             return flight;
         }
     }

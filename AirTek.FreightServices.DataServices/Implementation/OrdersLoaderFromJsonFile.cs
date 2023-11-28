@@ -25,8 +25,10 @@ namespace AirTek.FreightServices.DataServices.Implementation
             if (json != null)
             {
                 JObject o = JObject.Parse(json);
-                OrderDataModel orderDataModel = new OrderDataModel();
-                orderDataModel.Orders = new Dictionary<string, OrderDetailsDataModel>();
+                OrderDataModel orderDataModel = new()
+                {
+                    Orders = new Dictionary<string, OrderDetailsDataModel>()
+                };
 
                 foreach (var obj in o.Children())
                 {

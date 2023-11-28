@@ -3,17 +3,17 @@ using System.Text;
 
 namespace AirTek.FreightServices.Shared.Models.Flight
 {
-    public record FlightsSchedule<T> where T : IFlight
+    public record FreightTransportSchedule<T> where T : IFreightTransportWithCapacity
     {
-        public ICollection<T> Flights { get; } = new List<T>();
+        public ICollection<T> FreightTransport { get; } = new List<T>();
 
         public override string ToString()
         {
             var sb = new StringBuilder();
 
-            foreach (var flight in Flights)
+            foreach (var transport in FreightTransport)
             {
-                sb.AppendLine(flight.ToString());
+                sb.AppendLine(transport.ToString());
             }
 
             return sb.ToString();

@@ -3,7 +3,7 @@ using AirTek.FreightServices.Shared.Models.Flight;
 
 namespace AirTek.FreightServices.FlightsServices.Interfaces.Services
 {
-    public interface IFlightSchedulingServiceWithDisplay<T> : IFlightSchedulingService<T> where T : IFlight
+    public interface IBaseService
     {
         string GetDisplayString();
     }

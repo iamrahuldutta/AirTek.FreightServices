@@ -3,6 +3,8 @@ using AirTek.FreightServices.DataServices.Implementation;
 using AirTek.FreightServices.DataServices.Interfaces;
 using AirTek.FreightServices.Main.Implementation;
 using AirTek.FreightServices.OrderServices.Implementation;
+using AirTek.FreightServices.Shared.Interfaces;
+using AirTek.FreightServices.Shared.Models.Flight;
 using System.Text;
 
 namespace AirTek.FreightServices.Main
@@ -52,7 +54,7 @@ namespace AirTek.FreightServices.Main
         private static void LoadAirFreightCargoSchedule()
         {
             var userInput = GetUserInput();
-            var flightSchedulingService = new AirFreightCargoFlightBuilder().WithUserInput(userInput).Build();
+            var flightSchedulingService = new AirFreightCargoFlightBuilder<AirFreightFlight>().WithUserInput(userInput).Build();
             var flightsScheduleList = flightSchedulingService.CreateFlightsScheduleList();
             Console.WriteLine("Flights Schedule Result:");
             Console.WriteLine(flightSchedulingService.GetDisplayString());

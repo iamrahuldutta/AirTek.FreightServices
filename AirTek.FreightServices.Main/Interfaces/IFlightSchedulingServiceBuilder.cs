@@ -3,9 +3,11 @@ using AirTek.FreightServices.Shared.Interfaces;
 
 namespace AirTek.FreightServices.Main.Interfaces
 {
-    public interface IFlightSchedulingServiceBuilder<T, T2> where T : IFlightSchedulingServiceWithDisplay<T2>
-              where T2 : IFlight
+    public interface IFlightSchedulingServiceBuilder<T, T2>
+        where T : IFreightTransportWithCapacity
+        where T2 : IFreightTransportSchedulingService<T>
+
     {
-        T Build();
+        T2 Build();
     }
 }

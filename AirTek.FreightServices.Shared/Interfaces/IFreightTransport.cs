@@ -2,10 +2,10 @@
 
 namespace AirTek.FreightServices.Shared.Interfaces
 {
-    public interface IFlight
+    public interface IFreightTransport
     {
+        int TransportNumber { get; init; }
         CityInformation Arrival { get; init; }
         CityInformation Departure { get; init; }
-        int FlightNumber { get; init; }
     }
 }
