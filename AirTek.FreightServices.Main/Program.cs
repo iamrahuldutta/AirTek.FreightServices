@@ -1,10 +1,6 @@
-﻿using AirFreightServices.OrdersScheduler.Interfaces;
-using AirTek.FreightServices.DataServices.Implementation;
-using AirTek.FreightServices.DataServices.Interfaces;
-using AirTek.FreightServices.Main.Implementation;
-using AirTek.FreightServices.OrderServices.Implementation;
-using AirTek.FreightServices.Shared.Interfaces;
+﻿using AirTek.FreightServices.Main.Implementation;
 using AirTek.FreightServices.Shared.Models.Flight;
+using AirTek.FreightServices.Shared.Models.Order;
 using System.Text;
 
 namespace AirTek.FreightServices.Main
@@ -15,8 +11,10 @@ namespace AirTek.FreightServices.Main
         {
             PrintSampleInput();
             PrintInputRequest();
-            LoadAirFreightCargoSchedule();
-            await LoadOrders();
+            var userInput = GetUserInput();
+            var flightSchedule = LoadAirFreightCargoSchedule(userInput);
+            var orders = await LoadOrders();
+            AssignOrdersToFreightTransport(flightSchedule, orders);
         }
 
         private static void PrintSampleInput()
@@ -51,21 +49,21 @@ namespace AirTek.FreightServices.Main
             return userInput.ToString();
         }
 
-        private static void LoadAirFreightCargoSchedule()
+        private static List<FreightTransportSchedule<AirFreightFlight>> LoadAirFreightCargoSchedule(string userInput)
         {
-            var userInput = GetUserInput();
             var flightSchedulingService = new AirFreightCargoFlightBuilder<AirFreightFlight>().WithUserInput(userInput).Build();
-            var flightsScheduleList = flightSchedulingService.CreateFlightsScheduleList();
-            Console.WriteLine("Flights Schedule Result:");
-            Console.WriteLine(flightSchedulingService.GetDisplayString());
+            return flightSchedulingService;
         }
 
-        private static async Task LoadOrders()
+        private static async Task<OrderData> LoadOrders()
         {
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "coding-assigment-orders.json");
-            IOrdersLoader ordersLoader = new OrdersLoaderFromJsonFile(filePath);
-            IOrderDataService orderLoader = new OrderDataService(ordersLoader);
-            Console.WriteLine((await orderLoader.GetOrders()).ToString());
+            return await new OrdersLoaderBuilder().WithJsonFilePath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "coding-assigment-orders.json"))
+                .Build();
+        }
+
+        private static void AssignOrdersToFreightTransport(List<FreightTransportSchedule<AirFreightFlight>> freightTransportSchedules, OrderData orderData)
+        {
+            new AddOrdersToFlightBuilder<AirFreightFlight>().WithSchedule(freightTransportSchedules).WithOrders(orderData).Build();
         }
     }
 }

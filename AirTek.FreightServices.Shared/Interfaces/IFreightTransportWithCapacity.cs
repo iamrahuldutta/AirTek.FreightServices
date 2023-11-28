@@ -1,8 +1,7 @@
-﻿using AirTek.FreightServices.Shared.Models.Flight;
-
-namespace AirTek.FreightServices.Shared.Interfaces
+﻿namespace AirTek.FreightServices.Shared.Interfaces
 {
-    public interface IFreightTransportWithCapacity : IFreightTransport, ICapacity
+    public interface IFreightTransportWithCapacity : IFreightTransport
     {
+        int Capacity { get; init; }
     }
 }

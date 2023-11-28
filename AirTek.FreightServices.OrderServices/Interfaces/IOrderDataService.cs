@@ -4,6 +4,6 @@ namespace AirFreightServices.OrdersScheduler.Interfaces
 {
     public interface IOrderDataService
     {
-        Task<IEnumerable<OrdersGroupByDestination>> GetOrders();
+        Task<OrderData> GetOrders();
     }
 }

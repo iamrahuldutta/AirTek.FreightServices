@@ -1,18 +1,18 @@
 ﻿using AirTek.FreightServices.FlightsServices.Interfaces.InputParsers;
 using AirTek.FreightServices.FlightsServices.Interfaces.Services;
 using AirTek.FreightServices.Shared.Interfaces;
-using AirTek.FreightServices.Shared.Interfaces.Factory;
 using AirTek.FreightServices.Shared.Interfaces.Factory.Models;
 using AirTek.FreightServices.Shared.Models.Flight;
+using System.Text;
 
 namespace AirTek.FreightServices.FlightsServices.Implemenation.Services
 {
-    public class FreightTransportSchedulingViaUserInputService<T> : IFreightTransportSchedulingService<T>  where T : IFreightTransportWithCapacity
+    public class FreightTransportSchedulingViaUserInputService<T> : IFreightTransportSchedulingService<T> where T : IFreightTransportWithCapacity
     {
         private readonly string _userInput;
         private readonly IFreightTransportScheduleFactory _flightScheduleFactory;
         private readonly IFreightTransportSchedulerParserFromUserInput _flightDetailsParser;
-        private FreightTransportScheduleList<T> _flightsSchedulingList;
+        private List<FreightTransportSchedule<T>> _flightsSchedulingList;
 
         public FreightTransportSchedulingViaUserInputService(string userInput, IFreightTransportScheduleFactory flightScheduleFactory, IFreightTransportSchedulerParserFromUserInput flightDetailsParser)
         {
@@ -21,7 +21,7 @@ namespace AirTek.FreightServices.FlightsServices.Implemenation.Services
             _flightDetailsParser = flightDetailsParser;
         }
 
-        public FreightTransportScheduleList<T> CreateFlightsScheduleList()
+        public List<FreightTransportSchedule<T>> CreateFlightsScheduleList()
         {
             if (!string.IsNullOrEmpty(_userInput))
             {
@@ -37,7 +37,7 @@ namespace AirTek.FreightServices.FlightsServices.Implemenation.Services
                     {
                         int currentDay = _flightDetailsParser.ParseDayValue(line);
                         flightSchedule = _flightScheduleFactory.CreateFreightTransportSchedule<T>();
-                        _flightsSchedulingList.AddPerDayFlightsSchedule(flightSchedule);
+                        _flightsSchedulingList.Add(flightSchedule);
 
                         if (flightSchedule is PerDayFreightTransportSchedule<T> perDay)
                         {
@@ -60,7 +60,14 @@ namespace AirTek.FreightServices.FlightsServices.Implemenation.Services
 
         public string GetDisplayString()
         {
-            return _flightsSchedulingList.ToString();
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var item in _flightsSchedulingList)
+            {
+                sb.AppendLine(item.ToString());
+            }
+
+            return sb.ToString();
         }
 
     }

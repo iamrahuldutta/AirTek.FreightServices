@@ -3,7 +3,7 @@ using System.Text;
 
 namespace AirTek.FreightServices.Shared.Models.Flight
 {
-    public record FreightTransportScheduleList<T>(ICollection<FreightTransportSchedule<T>> FreightTransportList) where T : IFreightTransportWithCapacity
+    public record FreightTransportScheduleList<T>(ICollection<FreightTransportSchedule<T>> FreightTransportList) : IFreightTransportScheduleList<T> where T : IFreightTransportWithCapacity
     {
         public FreightTransportScheduleList() : this(new List<FreightTransportSchedule<T>>())
         {

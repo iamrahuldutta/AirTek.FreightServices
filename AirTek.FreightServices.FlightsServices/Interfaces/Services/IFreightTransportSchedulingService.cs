@@ -5,6 +5,6 @@ namespace AirTek.FreightServices.FlightsServices.Interfaces.Services
 {
     public interface IFreightTransportSchedulingService<T> : IBaseService where T : IFreightTransportWithCapacity
     {
-        FreightTransportScheduleList<T> CreateFlightsScheduleList();
+        List<FreightTransportSchedule<T>> CreateFlightsScheduleList();
     }
 }
