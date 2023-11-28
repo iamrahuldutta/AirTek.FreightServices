@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AirTek.FreightServices.FlightsServices\AirTek.FreightServices.FlightsServices.csproj" />
+    <ProjectReference Include="..\AirTek.FreightServices.OrderServices\AirTek.FreightServices.OrderServices.csproj" />
     <ProjectReference Include="..\AirTek.FreightServices.Shared\AirTek.FreightServices.Shared.csproj" />
   </ItemGroup>
 

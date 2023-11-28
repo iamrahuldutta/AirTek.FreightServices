@@ -1,11 +1,13 @@
-﻿using AirTek.FreightServices.FlightsServices.Interfaces.Services;
-using AirTek.FreightServices.Shared.Interfaces;
+﻿using AirTek.FreightServices.Shared.Interfaces;
+using AirTek.FreightServices.Shared.Models.Flight;
 
 namespace AirTek.FreightServices.Main.Interfaces
 {
-    public interface IFlightSchedulingServiceBuilder<T, T2> where T : IFlightSchedulingServiceWithDisplay<T2>
-              where T2 : IFlight
+    public interface IFlightSchedulingServiceBuilder<T, T2>
+        where T : IFreightTransportWithCapacity
+        where T2 : List<FreightTransportSchedule<T>>
+
     {
-        T Build();
+        T2 Build();
     }
 }

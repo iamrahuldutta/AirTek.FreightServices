@@ -1,15 +1,20 @@
 ﻿using AirTek.FreightServices.Main.Implementation;
+using AirTek.FreightServices.Shared.Models.Flight;
+using AirTek.FreightServices.Shared.Models.Order;
 using System.Text;
 
 namespace AirTek.FreightServices.Main
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             PrintSampleInput();
             PrintInputRequest();
-            LoadAirFreightCargoSchedule();
+            var userInput = GetUserInput();
+            var flightSchedule = LoadAirFreightCargoSchedule(userInput);
+            var orders = await LoadOrders();
+            AssignOrdersToFreightTransport(flightSchedule, orders);
         }
 
         private static void PrintSampleInput()
@@ -44,13 +49,21 @@ namespace AirTek.FreightServices.Main
             return userInput.ToString();
         }
 
-        private static void LoadAirFreightCargoSchedule()
+        private static List<FreightTransportSchedule<AirFreightFlight>> LoadAirFreightCargoSchedule(string userInput)
         {
-            var userInput = GetUserInput();
-            var flightSchedulingService = new AirFreightCargoFlightBuilder().WithUserInput(userInput).Build();
-            var flightsScheduleList = flightSchedulingService.CreateFlightsScheduleList();
-            Console.WriteLine("Flights Schedule Result:");
-            Console.WriteLine(flightSchedulingService.GetDisplayString());
+            var flightSchedulingService = new AirFreightCargoFlightBuilder<AirFreightFlight>().WithUserInput(userInput).Build();
+            return flightSchedulingService;
+        }
+
+        private static async Task<OrderData> LoadOrders()
+        {
+            return await new OrdersLoaderBuilder().WithJsonFilePath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "coding-assigment-orders.json"))
+                .Build();
+        }
+
+        private static void AssignOrdersToFreightTransport(List<FreightTransportSchedule<AirFreightFlight>> freightTransportSchedules, OrderData orderData)
+        {
+            new AddOrdersToFlightBuilder<AirFreightFlight>().WithSchedule(freightTransportSchedules).WithOrders(orderData).Build();
         }
     }
 }

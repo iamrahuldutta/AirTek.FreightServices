@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTek.FreightServices.Main", "AirTek.FreightServices.Main\AirTek.FreightServices.Main.csproj", "{13A87BFC-8A81-4525-846B-78A254A18182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirTek.FreightServices.Main", "AirTek.FreightServices.Main\AirTek.FreightServices.Main.csproj", "{13A87BFC-8A81-4525-846B-78A254A18182}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTek.FreightServices.Shared", "AirTek.FreightServices.Shared\AirTek.FreightServices.Shared.csproj", "{2EB44653-17BD-4FEA-9266-E83855D834B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirTek.FreightServices.Shared", "AirTek.FreightServices.Shared\AirTek.FreightServices.Shared.csproj", "{2EB44653-17BD-4FEA-9266-E83855D834B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTek.FreightServices.FlightsServices", "AirTek.FreightServices.FlightsServices\AirTek.FreightServices.FlightsServices.csproj", "{92E52E08-8BFA-4C50-A75E-6F05D029D208}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirTek.FreightServices.FlightsServices", "AirTek.FreightServices.FlightsServices\AirTek.FreightServices.FlightsServices.csproj", "{92E52E08-8BFA-4C50-A75E-6F05D029D208}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirTek.FreightServices.OrderServices", "AirTek.FreightServices.OrderServices\AirTek.FreightServices.OrderServices.csproj", "{6A966134-03B1-4C32-AC95-FE97C87E6E7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirTek.FreightServices.DataServices", "AirTek.FreightServices.DataServices\AirTek.FreightServices.DataServices.csproj", "{4EC79DCF-8FF1-402E-89DA-069E3E9ED339}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTek.FreightServices.OrdersScheduler", "AirTek.FreightServices.OrdersScheduler\AirTek.FreightServices.OrdersScheduler.csproj", "{083975F9-67CF-401C-B6E5-7746031A0AD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{92E52E08-8BFA-4C50-A75E-6F05D029D208}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92E52E08-8BFA-4C50-A75E-6F05D029D208}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92E52E08-8BFA-4C50-A75E-6F05D029D208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A966134-03B1-4C32-AC95-FE97C87E6E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A966134-03B1-4C32-AC95-FE97C87E6E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A966134-03B1-4C32-AC95-FE97C87E6E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A966134-03B1-4C32-AC95-FE97C87E6E7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EC79DCF-8FF1-402E-89DA-069E3E9ED339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EC79DCF-8FF1-402E-89DA-069E3E9ED339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EC79DCF-8FF1-402E-89DA-069E3E9ED339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EC79DCF-8FF1-402E-89DA-069E3E9ED339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{083975F9-67CF-401C-B6E5-7746031A0AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{083975F9-67CF-401C-B6E5-7746031A0AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{083975F9-67CF-401C-B6E5-7746031A0AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{083975F9-67CF-401C-B6E5-7746031A0AD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
