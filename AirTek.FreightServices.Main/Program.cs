@@ -12,9 +12,14 @@ namespace AirTek.FreightServices.Main
             PrintSampleInput();
             PrintInputRequest();
             var userInput = GetUserInput();
-            var flightSchedule = LoadAirFreightCargoSchedule(userInput);
-            var orders = await LoadOrders();
-            AssignOrdersToFreightTransport(flightSchedule, orders);
+            if (!string.IsNullOrEmpty(userInput))
+            {
+                var flightSchedule = LoadAirFreightCargoSchedule(userInput);
+                var orders = await LoadOrders();
+                AssignOrdersToFreightTransport(flightSchedule, orders);
+            }
+            Console.WriteLine("Execution finished");
+            Console.ReadLine();
         }
 
         private static void PrintSampleInput()
@@ -46,7 +51,14 @@ namespace AirTek.FreightServices.Main
                 }
                 userInput.AppendLine(line);
             }
+
+            if (string.IsNullOrEmpty(userInput.ToString()))
+            {
+                Console.WriteLine("No input provided");
+            }
+
             return userInput.ToString();
+
         }
 
         private static List<FreightTransportSchedule<AirFreightFlight>> LoadAirFreightCargoSchedule(string userInput)
