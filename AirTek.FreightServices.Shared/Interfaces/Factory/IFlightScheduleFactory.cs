@@ -4,6 +4,6 @@ namespace AirTek.FreightServices.Shared.Interfaces.Factory
 {
     public interface IFlightScheduleFactory
     {
-        FlightsSchedule<T> CreateFlightsSchedule<T>() where T : Flight;
+        FlightsSchedule<T> CreateFlightsSchedule<T>() where T : IFlight;
     }
 }

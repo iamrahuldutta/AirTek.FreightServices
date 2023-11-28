@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTek.FreightServices.Main
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTek.FreightServices.Shared", "AirTek.FreightServices.Shared\AirTek.FreightServices.Shared.csproj", "{2EB44653-17BD-4FEA-9266-E83855D834B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirTek.FreightServices.FlightsServices", "AirTek.FreightServices.FlightsServices\AirTek.FreightServices.FlightsServices.csproj", "{92E52E08-8BFA-4C50-A75E-6F05D029D208}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2EB44653-17BD-4FEA-9266-E83855D834B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB44653-17BD-4FEA-9266-E83855D834B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB44653-17BD-4FEA-9266-E83855D834B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E52E08-8BFA-4C50-A75E-6F05D029D208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E52E08-8BFA-4C50-A75E-6F05D029D208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E52E08-8BFA-4C50-A75E-6F05D029D208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E52E08-8BFA-4C50-A75E-6F05D029D208}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

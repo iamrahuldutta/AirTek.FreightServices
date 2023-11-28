@@ -1,7 +1,9 @@
-﻿namespace AirTek.FreightServices.Shared.Models.Flight
+﻿using AirTek.FreightServices.Shared.Interfaces;
+
+namespace AirTek.FreightServices.Shared.Models.Flight
 {
     public record AirFreightCargoFlight(int FlightNumber, int Capacity, CityInformation Departure, CityInformation Arrival)
-        : Flight(FlightNumber, Departure, Arrival)
+        : Flight(FlightNumber, Departure, Arrival), IAirFreightCargoFlight
     {
         public override string ToString()
         {

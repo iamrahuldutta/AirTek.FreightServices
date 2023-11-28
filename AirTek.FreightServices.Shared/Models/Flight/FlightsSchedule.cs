@@ -1,8 +1,9 @@
-﻿using System.Text;
+﻿using AirTek.FreightServices.Shared.Interfaces;
+using System.Text;
 
 namespace AirTek.FreightServices.Shared.Models.Flight
 {
-    public record FlightsSchedule<T> where T : Flight
+    public record FlightsSchedule<T> where T : IFlight
     {
         public ICollection<T> Flights { get; } = new List<T>();
 
