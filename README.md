@@ -18,6 +18,7 @@ Flight 8: Montreal (YUL) to Calgary (YYC)
 Flight 9: Montreal (YUL) to Vancouver (YVR)
 ******************************
 
+
 Expected output for flights scheduling:
 Flight: 1, departure: YUL, arrival: YYZ, day: 1
 ...
